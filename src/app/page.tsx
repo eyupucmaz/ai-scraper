@@ -8,7 +8,7 @@ import ScrollToTop from '@/components/ui/scroll-to-top';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <Hero />
       <Features />

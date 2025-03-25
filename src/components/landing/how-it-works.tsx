@@ -37,11 +37,11 @@ export function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="py-16">
+    <section id="how-it-works" className="py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">How It Works</h2>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl">How It Works</h2>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Get started with AI Scraper in just a few simple steps. Extract the data you need
             without complex setup.
           </p>
@@ -51,21 +51,19 @@ export function HowItWorks() {
 
         <div className="mt-12">
           <div className="relative">
-            {/* Connecting line */}
-            <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className="w-full border-t border-gray-300" />
-            </div>
-
             {/* Steps */}
-            <div className="relative flex justify-between">
+            <div className="relative flex flex-wrap justify-between">
               {steps.map(step => (
-                <div key={step.number} className="relative flex flex-col items-center">
-                  <div className="bg-primary text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">
+                <div
+                  key={step.number}
+                  className="relative flex flex-col items-center mb-8 md:mb-0 w-full sm:w-1/2 md:w-auto px-4"
+                >
+                  <div className="bg-primary text-primary-foreground rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg ring-4 ring-background">
                     {step.number}
                   </div>
-                  <div className="mt-6 text-center max-w-xs">
-                    <h3 className="text-lg font-medium text-gray-900">{step.title}</h3>
-                    <p className="mt-2 text-sm text-gray-600">{step.description}</p>
+                  <div className="mt-6 text-center max-w-[250px]">
+                    <h3 className="text-lg font-medium text-foreground">{step.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">{step.description}</p>
                   </div>
                 </div>
               ))}
@@ -74,17 +72,17 @@ export function HowItWorks() {
         </div>
 
         {/* Code Example */}
-        <div className="mt-20 bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-          <div className="px-4 py-3 bg-gray-700 flex items-center">
+        <div className="mt-20 bg-card rounded-lg shadow-lg overflow-hidden border border-border">
+          <div className="px-4 py-3 bg-muted flex items-center">
             <div className="flex space-x-1">
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
               <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
-            <div className="ml-3 text-white text-sm">API Request Example</div>
+            <div className="ml-3 text-foreground text-sm">API Request Example</div>
           </div>
           <div className="p-4 sm:p-6 overflow-x-auto">
-            <pre className="text-white text-sm">{`// Example API request
+            <pre className="text-card-foreground text-sm">{`// Example API request
 fetch('https://api.aiscraper.com/scrape', {
   method: 'POST',
   headers: {

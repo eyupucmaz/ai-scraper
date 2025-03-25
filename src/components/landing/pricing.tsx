@@ -67,13 +67,13 @@ export function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-16 bg-gray-50">
+    <section id="pricing" className="py-16 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl">
             Simple, Transparent Pricing
           </h2>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Choose the plan that fits your needs. All plans include access to the AI Scraper API and
             dashboard.
           </p>
@@ -85,19 +85,19 @@ export function Pricing() {
           {tiers.map(tier => (
             <Card
               key={tier.name}
-              className={tier.highlighted ? 'border-primary shadow-lg relative' : 'border-gray-200'}
+              className={tier.highlighted ? 'border-primary shadow-lg relative' : ''}
             >
               {tier.highlighted && (
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full">
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground text-xs px-3 py-1 rounded-full">
                   Most Popular
                 </div>
               )}
               <CardHeader className="pb-0">
                 <CardTitle className="text-2xl">{tier.name}</CardTitle>
-                <div className="mt-2 flex items-baseline text-gray-900">
+                <div className="mt-2 flex items-baseline text-foreground">
                   <span className="text-4xl font-extrabold">{tier.price}</span>
                   {tier.price !== 'Custom' && (
-                    <span className="ml-1 text-xl text-gray-500">/mo</span>
+                    <span className="ml-1 text-xl text-muted-foreground">/mo</span>
                   )}
                 </div>
                 <CardDescription className="mt-2">{tier.description}</CardDescription>
@@ -107,7 +107,7 @@ export function Pricing() {
                   {tier.features.map(feature => (
                     <li key={feature} className="flex">
                       <Check className="h-5 w-5 text-green-500 flex-shrink-0 mr-2" />
-                      <span className="text-gray-600">{feature}</span>
+                      <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -126,7 +126,7 @@ export function Pricing() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             All plans include access to the dashboard, documentation, and API. Need a custom plan?
             Contact us for special requirements.
           </p>

@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useSession } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function Navbar() {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Scroll değişimini dinleyerek navbar'ın görünümünü değiştiren efekt
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -30,7 +30,7 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className={`bg-white border-b py-4 sticky top-0 z-50 transition-all duration-300 ${
+      className={`bg-background/95 backdrop-blur-sm border-b border-border py-4 sticky top-0 z-50 transition-all duration-300 ${
         scrolled ? 'shadow-md' : ''
       }`}
       initial={{ opacity: 0, y: -20 }}
@@ -83,26 +83,38 @@ export function Navbar() {
                   strokeLinejoin="round"
                 />
               </motion.svg>
-              <span className="ml-2 text-xl font-bold text-gray-900">AI Scraper</span>
+              <span className="ml-2 text-xl font-bold text-foreground">AI Scraper</span>
             </Link>
           </motion.div>
 
           {/* Desktop navigation */}
           <div className="hidden md:flex md:items-center md:space-x-6">
             <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
-              <Link href="#features" className="text-gray-600 hover:text-gray-900">
+              <Link
+                href="#features"
+                className="text-foreground/80 hover:text-foreground font-medium"
+              >
                 Features
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
-              <Link href="#how-it-works" className="text-gray-600 hover:text-gray-900">
+              <Link
+                href="#how-it-works"
+                className="text-foreground/80 hover:text-foreground font-medium"
+              >
                 How It Works
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
-              <Link href="#pricing" className="text-gray-600 hover:text-gray-900">
+              <Link
+                href="#pricing"
+                className="text-foreground/80 hover:text-foreground font-medium"
+              >
                 Pricing
               </Link>
+            </motion.div>
+            <motion.div className="mr-2" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <ThemeToggle />
             </motion.div>
             {session ? (
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -120,10 +132,11 @@ export function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+              className="text-foreground focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -170,7 +183,7 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden px-4 pt-2 pb-3 space-y-1 bg-white border-t"
+            className="md:hidden px-4 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-sm border-t border-border"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -183,7 +196,7 @@ export function Navbar() {
             >
               <Link
                 href="#features"
-                className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900"
+                className="block py-2 text-base font-medium text-foreground/80 hover:text-foreground"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features
@@ -196,7 +209,7 @@ export function Navbar() {
             >
               <Link
                 href="#how-it-works"
-                className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900"
+                className="block py-2 text-base font-medium text-foreground/80 hover:text-foreground"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 How It Works
@@ -209,7 +222,7 @@ export function Navbar() {
             >
               <Link
                 href="#pricing"
-                className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900"
+                className="block py-2 text-base font-medium text-foreground/80 hover:text-foreground"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Pricing

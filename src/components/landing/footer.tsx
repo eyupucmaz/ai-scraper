@@ -5,13 +5,13 @@ import { Separator } from '@/components/ui/separator';
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center">
               <svg
-                className="h-8 w-8 text-primary"
+                className="h-8 w-8 text-primary-foreground"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -40,33 +40,42 @@ export function Footer() {
               </svg>
               <span className="ml-2 text-xl font-bold">AI Scraper</span>
             </div>
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 text-sm text-primary-foreground/70">
               AI-powered web scraping API for structured data extraction
             </p>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">
+            <h3 className="text-sm font-semibold text-primary-foreground/90 tracking-wider uppercase">
               Product
             </h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link href="#features" className="text-gray-400 hover:text-white">
+                <Link
+                  href="#features"
+                  className="text-primary-foreground/70 hover:text-primary-foreground"
+                >
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="#how-it-works" className="text-gray-400 hover:text-white">
+                <Link
+                  href="#how-it-works"
+                  className="text-primary-foreground/70 hover:text-primary-foreground"
+                >
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link href="#pricing" className="text-gray-400 hover:text-white">
+                <Link
+                  href="#pricing"
+                  className="text-primary-foreground/70 hover:text-primary-foreground"
+                >
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
                   Documentation
                 </Link>
               </li>
@@ -74,22 +83,22 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">
+            <h3 className="text-sm font-semibold text-primary-foreground/90 tracking-wider uppercase">
               Support
             </h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
                   API Status
                 </Link>
               </li>
@@ -97,20 +106,22 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Legal</h3>
+            <h3 className="text-sm font-semibold text-primary-foreground/90 tracking-wider uppercase">
+              Legal
+            </h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
                   Cookie Policy
                 </Link>
               </li>
@@ -118,20 +129,20 @@ export function Footer() {
           </div>
         </div>
 
-        <Separator className="my-8 border-gray-700" />
+        <Separator className="my-8 border-primary-foreground/20" />
 
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-primary-foreground/70 text-sm">
             &copy; {new Date().getFullYear()} AI Scraper. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="#" className="text-gray-400 hover:text-white">
+            <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
               <span className="sr-only">Twitter</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
               </svg>
             </Link>
-            <Link href="#" className="text-gray-400 hover:text-white">
+            <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
               <span className="sr-only">GitHub</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
@@ -141,7 +152,7 @@ export function Footer() {
                 />
               </svg>
             </Link>
-            <Link href="#" className="text-gray-400 hover:text-white">
+            <Link href="#" className="text-primary-foreground/70 hover:text-primary-foreground">
               <span className="sr-only">LinkedIn</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
