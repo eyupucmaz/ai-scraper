@@ -8,7 +8,7 @@ AI Scraper API is a service designed for developers and data analysts who need t
 
 ### 1.2 Product Overview
 
-The product consists of a web application with a user-friendly interface and a REST API that allows users to scrape web content and convert it into structured JSON data. The service uses Gemini AI to interpret and transform web content based on user requirements.
+The product consists of a web application with a user-friendly interface and a REST API that allows users to scrape web content and convert it into structured JSON data. The service initially uses https://r.jina.ai for web content extraction and Gemini AI to interpret and transform web content based on user requirements. In future versions, the system will integrate Puppeteer for direct web scraping and support additional AI providers.
 
 ### 1.3 Target Audience
 
@@ -187,8 +187,13 @@ The product consists of a web application with a user-friendly interface and a R
 
 ## 7. Future Enhancements
 
-- Support for additional AI models beyond Gemini
-- Advanced scraping features (JavaScript rendering, etc.)
+- Puppeteer integration for direct web scraping, replacing the dependency on r.jina.ai
+- Support for additional AI models beyond Gemini:
+  - OpenAI API (GPT models)
+  - Anthropic Claude
+  - xAI Grok
+  - DeepSeek
+- Advanced scraping features (JavaScript rendering, login handling, etc.)
 - Scheduled scraping jobs
 - Custom scraping rules and preprocessing options
 - Data transformation and export options

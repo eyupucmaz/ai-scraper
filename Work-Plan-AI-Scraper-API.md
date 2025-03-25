@@ -162,3 +162,38 @@
 - [ ] Plan next development sprint
 - [ ] Set up continuous improvement process
 - [ ] Begin implementation of priority enhancements
+
+## Phase 8: Puppeteer Integration and Advanced Scraping
+
+### 8.1 Puppeteer Implementation (Future)
+
+- [ ] Set up Puppeteer infrastructure
+- [ ] Implement basic scraping functionality
+- [ ] Add JavaScript rendering support
+- [ ] Implement login and session handling
+- [ ] Create proxy rotation system
+
+### 8.2 Scraping Features Enhancement (Future)
+
+- [ ] Develop custom scraping rule builder UI
+- [ ] Implement scheduled scraping jobs
+- [ ] Create data storage and history
+- [ ] Add export functionality (CSV, Excel, etc.)
+- [ ] Implement data change monitoring
+
+## Phase 9: Additional AI Provider Integration
+
+### 9.1 AI Provider Infrastructure (Future)
+
+- [ ] Design modular AI provider architecture
+- [ ] Implement provider selection UI
+- [ ] Create unified API response formatting
+- [ ] Add provider-specific configuration options
+
+### 9.2 Provider Implementations (Future)
+
+- [ ] Integrate OpenAI API (GPT models)
+- [ ] Implement Anthropic Claude integration
+- [ ] Add xAI Grok support
+- [ ] Integrate DeepSeek models
+- [ ] Create performance comparison metrics
