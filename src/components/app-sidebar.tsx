@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Avatar } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import {
   Sidebar,
   SidebarHeader,
@@ -14,11 +13,16 @@ import {
   SidebarMenuButton,
   SidebarGroup,
 } from '@/components/ui/sidebar';
-import { Home, BarChart, Database, FileText, LogOut } from 'lucide-react';
+import { Home, BarChart, Database, FileText, LogOut, User, CreditCard } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { ThemeToggle } from '@/components/theme-toggle';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -71,41 +75,54 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4 border-t">
-        <Link
-          href="/dashboard/profile"
-          className={`flex items-center ${pathname === '/dashboard/profile' ? '' : ''}`}
-        >
-          <Avatar className="h-9 w-9">
-            {session?.user?.image ? (
-              <Image
-                src={session.user.image}
-                alt={session.user.name || 'User'}
-                width={36}
-                height={36}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-600">
-                {session?.user?.email?.[0]?.toUpperCase() || 'U'}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <div className="flex items-center cursor-pointer hover:bg-muted/50 rounded-md p-2 transition-colors">
+              <Avatar className="h-9 w-9">
+                {session?.user?.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name || 'User'}
+                    width={36}
+                    height={36}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-600">
+                    {session?.user?.email?.[0]?.toUpperCase() || 'U'}
+                  </div>
+                )}
+              </Avatar>
+              <div className="ml-3 flex-1">
+                <p className="text-sm font-medium">{session?.user?.name || session?.user?.email}</p>
               </div>
-            )}
-          </Avatar>
-          <div className="ml-3 flex-1">
-            <p className="text-sm font-medium">{session?.user?.name || session?.user?.email}</p>
-          </div>
-        </Link>
-        <div className="max-w-fit flex items-center justify-start gap-x-2">
-          <Button
-            variant="outline"
-            size={'sm'}
-            className="w-full flex items-center justify-center"
-            onClick={() => router.push('/auth/signout')}
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Sign Out
-          </Button>
-          <ThemeToggle />
-        </div>
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-56">
+            <DropdownMenuItem
+              onClick={() => router.push('/dashboard/profile')}
+              className="cursor-pointer"
+            >
+              <User className="w-4 h-4 mr-2" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push('/dashboard/billing')}
+              className="cursor-pointer"
+            >
+              <CreditCard className="w-4 h-4 mr-2" />
+              Billing
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push('/auth/signout')}
+              variant="destructive"
+              className="cursor-pointer"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </SidebarFooter>
     </Sidebar>
   );

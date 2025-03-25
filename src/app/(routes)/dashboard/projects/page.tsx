@@ -1,11 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
-import { Separator } from '@/components/ui/separator';
-import { PlusCircle, Settings, Trash2 } from 'lucide-react';
+import { SidebarInset } from '@/components/ui/sidebar';
+import { PlusCircle, Settings, Trash2, Copy } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -14,36 +13,56 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { ProjectDialog } from '@/components/project-dialog';
+import { useRouter } from 'next/navigation';
+
+interface Project {
+  id: number;
+  name: string;
+  apiKey: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export default function Projects() {
-  const [projects] = useState([
-    {
-      id: '1',
-      name: 'E-commerce Scraper',
-      status: 'Active',
-      lastRun: '2023-03-24',
-      dataPoints: 1250,
-    },
-    {
-      id: '2',
-      name: 'News Aggregator',
-      status: 'Paused',
-      lastRun: '2023-03-20',
-      dataPoints: 872,
-    },
-  ]);
+  const router = useRouter();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchProjects = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('/api/projects');
+      if (!response.ok) {
+        throw new Error('Failed to fetch projects');
+      }
+      const data = await response.json();
+      setProjects(data);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+      setError('Failed to load projects');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
 
   return (
     <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
-        <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="mr-2 h-4" />
-        <h1 className="text-xl font-semibold">Projects</h1>
-      </header>
       <div className="flex flex-1 flex-col gap-6 p-6">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-medium">Your Scraping Projects</h2>
-          <Button>
+          <Button onClick={() => setIsDialogOpen(true)}>
             <PlusCircle className="mr-2 h-4 w-4" />
             New Project
           </Button>
@@ -55,39 +74,74 @@ export default function Projects() {
             <CardDescription>Manage and monitor all your scraping projects</CardDescription>
           </CardHeader>
           <CardContent>
-            {projects.length > 0 ? (
+            {isLoading ? (
+              <div className="text-center py-6">
+                <p className="text-muted-foreground">Loading projects...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-6">
+                <p className="text-destructive">{error}</p>
+                <Button className="mt-4" onClick={fetchProjects}>
+                  Try Again
+                </Button>
+              </div>
+            ) : projects.length > 0 ? (
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Last Run</TableHead>
-                    <TableHead>Data Points</TableHead>
+                    <TableHead>Created</TableHead>
+                    <TableHead>API Key</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {projects.map(project => (
-                    <TableRow key={project.id}>
+                    <TableRow
+                      key={project.id}
+                      className="cursor-pointer hover:bg-muted/50"
+                      onClick={() => router.push(`/dashboard/projects/${project.id}`)}
+                    >
                       <TableCell className="font-medium">{project.name}</TableCell>
+                      <TableCell>{new Date(project.createdAt).toLocaleDateString()}</TableCell>
                       <TableCell>
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            project.status === 'Active'
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
-                          }`}
-                        >
-                          {project.status}
-                        </span>
+                        <div className="flex items-center">
+                          <code className="bg-muted px-2 py-1 rounded text-xs mr-2 font-mono">
+                            {project.apiKey.substring(0, 8)}...
+                          </code>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={e => {
+                              e.stopPropagation();
+                              copyToClipboard(project.apiKey);
+                            }}
+                            title="Copy API Key"
+                          >
+                            <Copy className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </TableCell>
-                      <TableCell>{project.lastRun}</TableCell>
-                      <TableCell>{project.dataPoints}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="icon">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={e => {
+                            e.stopPropagation();
+                            router.push(`/dashboard/projects/${project.id}`);
+                          }}
+                        >
                           <Settings className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="text-destructive">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-destructive"
+                          onClick={e => {
+                            e.stopPropagation();
+                            // Delete functionality would be added here
+                          }}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </TableCell>
@@ -98,7 +152,7 @@ export default function Projects() {
             ) : (
               <div className="text-center py-6">
                 <p className="text-muted-foreground">You don&apos;t have any projects yet.</p>
-                <Button className="mt-4">
+                <Button className="mt-4" onClick={() => setIsDialogOpen(true)}>
                   <PlusCircle className="mr-2 h-4 w-4" />
                   Create Your First Project
                 </Button>
@@ -107,6 +161,16 @@ export default function Projects() {
           </CardContent>
         </Card>
       </div>
+      <ProjectDialog
+        open={isDialogOpen}
+        onOpenChange={open => {
+          setIsDialogOpen(open);
+          if (!open) {
+            // Refresh projects list when dialog is closed
+            fetchProjects();
+          }
+        }}
+      />
     </SidebarInset>
   );
 }

@@ -3,8 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
-import { Separator } from '@/components/ui/separator';
+import { SidebarInset } from '@/components/ui/sidebar';
 import { Spinner } from '@/components/ui/spinner';
 import Image from 'next/image';
 import {
@@ -74,11 +73,6 @@ export default function ProfilePage() {
 
   return (
     <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
-        <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="mr-2 h-4" />
-        <h1 className="text-xl font-semibold">Profile</h1>
-      </header>
       <div className="flex flex-1 flex-col gap-6 p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="md:col-span-1">
