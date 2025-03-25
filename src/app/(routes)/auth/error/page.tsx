@@ -36,6 +36,11 @@ export default function AuthError() {
         case 'Callback':
           setError('Error during callback processing.');
           break;
+        case 'OAuthAccountNotLinked':
+          setError(
+            'Email already exists with a different provider. Please sign in using the original provider or contact support for assistance.'
+          );
+          break;
         case 'AccessDenied':
           setError('Access denied. You may not have permission to access this resource.');
           break;
