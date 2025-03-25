@@ -38,7 +38,7 @@
 
 - [x] Implement user registration flow
 - [x] Implement sign-in functionality
-- [ ] Create user profile management
+- [x] Create user profile management
 - [ ] Implement API key generation and management
 - [ ] Create secure storage for Gemini API keys (encryption)
 
@@ -46,10 +46,10 @@
 
 ### 3.1 UI Component Setup (Week 3)
 
-- [ ] Install and configure Shadcn UI
-- [ ] Set up global styles and theme configuration
-- [ ] Create reusable UI components
-- [ ] Implement responsive design framework
+- [x] Install and configure Shadcn UI
+- [x] Set up global styles and theme configuration
+- [x] Create reusable UI components
+- [x] Implement responsive design framework
 
 ### 3.2 Landing Page (Week 3)
 
