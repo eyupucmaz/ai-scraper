@@ -111,7 +111,7 @@ export default function ProfilePage() {
           </Card>
 
           <Card className="md:col-span-2">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="space-y-4">
               <CardHeader>
                 <CardTitle>Personal Information</CardTitle>
                 <CardDescription>Update your personal details</CardDescription>
