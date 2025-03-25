@@ -8,11 +8,7 @@ export default {
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    host: 'localhost',
-    port: 5432,
-    user: 'postgres',
-    password: 'postgres',
-    database: 'ai_scraper',
-    ssl: false,
+    url: process.env.DATABASE_URL || '',
+    ssl: true,
   },
 } satisfies Config;
