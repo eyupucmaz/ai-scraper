@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,7 +12,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-export default function AuthError() {
+// Client component that uses useSearchParams
+function ErrorContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState<string>('');
@@ -57,19 +58,41 @@ export default function AuthError() {
   }, [searchParams]);
 
   return (
+    <Card className="w-full max-w-md mx-4">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl font-bold text-red-600">Authentication Error</CardTitle>
+        <CardDescription>There was a problem with your authentication</CardDescription>
+      </CardHeader>
+      <CardContent className="text-center">
+        <p className="mb-4">{error}</p>
+      </CardContent>
+      <CardFooter className="flex justify-center">
+        <Button onClick={() => router.push('/auth/signin')}>Back to Sign In</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+// Loading fallback component
+function ErrorLoading() {
+  return (
+    <Card className="w-full max-w-md mx-4">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl font-bold">Loading...</CardTitle>
+      </CardHeader>
+      <CardContent className="text-center">
+        <p>Processing authentication error details...</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function AuthError() {
+  return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Card className="w-full max-w-md mx-4">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-red-600">Authentication Error</CardTitle>
-          <CardDescription>There was a problem with your authentication</CardDescription>
-        </CardHeader>
-        <CardContent className="text-center">
-          <p className="mb-4">{error}</p>
-        </CardContent>
-        <CardFooter className="flex justify-center">
-          <Button onClick={() => router.push('/auth/signin')}>Back to Sign In</Button>
-        </CardFooter>
-      </Card>
+      <Suspense fallback={<ErrorLoading />}>
+        <ErrorContent />
+      </Suspense>
     </div>
   );
 }
