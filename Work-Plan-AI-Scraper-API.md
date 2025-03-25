@@ -7,7 +7,7 @@
 - [x] Initialize Next.js project with TypeScript and Turbopack
 - [x] Set up project structure separating frontend and API
 - [x] Configure ESLint, Prettier, and TypeScript settings
-- [ ] Set up Git repository and initial commit
+- [x] Set up Git repository and initial commit
 - [ ] Configure CI/CD pipeline (if applicable)
 
 ### 1.2 Docker Configuration (Week 1)
@@ -19,25 +19,25 @@
 
 ### 1.3 Database Setup (Week 1)
 
-- [ ] Set up PostgreSQL database in Docker
-- [ ] Configure Drizzle ORM
-- [ ] Create initial database schema migrations
-- [ ] Implement database connection and test functionality
+- [x] Set up PostgreSQL database in Docker
+- [x] Configure Drizzle ORM
+- [x] Create initial database schema migrations
+- [x] Implement database connection and test functionality
 
 ## Phase 2: Authentication and User Management
 
 ### 2.1 Authentication Setup (Week 2)
 
-- [ ] Install and configure NextAuth.js
-- [ ] Set up GitHub OAuth provider
-- [ ] Set up Google OAuth provider
-- [ ] Implement session management
-- [ ] Create user database schema
+- [x] Install and configure NextAuth.js
+- [x] Set up GitHub OAuth provider
+- [x] Set up Google OAuth provider
+- [x] Implement session management
+- [x] Create user database schema
 
 ### 2.2 User Management (Week 2)
 
-- [ ] Implement user registration flow
-- [ ] Implement sign-in functionality
+- [x] Implement user registration flow
+- [x] Implement sign-in functionality
 - [ ] Create user profile management
 - [ ] Implement API key generation and management
 - [ ] Create secure storage for Gemini API keys (encryption)
