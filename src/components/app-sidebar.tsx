@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import {
   Sidebar,
   SidebarHeader,
@@ -15,7 +14,7 @@ import {
   SidebarMenuButton,
   SidebarGroup,
 } from '@/components/ui/sidebar';
-import { Home, Settings, BarChart, Database, FileText, LogOut } from 'lucide-react';
+import { Home, BarChart, Database, FileText, LogOut } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -31,7 +30,6 @@ export function AppSidebar() {
       <SidebarHeader className="px-6 py-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">AI Scraper</h1>
-          <ThemeToggle />
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -71,21 +69,6 @@ export function AppSidebar() {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
-
-        <Separator className="my-4" />
-
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton isActive={pathname === '/dashboard/settings'} asChild>
-                <Link href="/dashboard/settings" className="flex items-center gap-3">
-                  <Settings className="w-5 h-5" />
-                  Settings
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4 border-t">
         <Link
@@ -111,15 +94,18 @@ export function AppSidebar() {
             <p className="text-sm font-medium">{session?.user?.name || session?.user?.email}</p>
           </div>
         </Link>
-        <Button
-          variant="outline"
-          size="sm"
-          className="mt-4 w-full flex items-center justify-center"
-          onClick={() => router.push('/auth/signout')}
-        >
-          <LogOut className="w-4 h-4 mr-2" />
-          Sign Out
-        </Button>
+        <div className="max-w-fit flex items-center justify-start gap-x-2">
+          <Button
+            variant="outline"
+            size={'sm'}
+            className="w-full flex items-center justify-center"
+            onClick={() => router.push('/auth/signout')}
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Sign Out
+          </Button>
+          <ThemeToggle />
+        </div>
       </SidebarFooter>
     </Sidebar>
   );
