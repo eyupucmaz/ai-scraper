@@ -2,7 +2,6 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -12,30 +11,21 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
+import { Separator } from '@/components/ui/separator';
 
 export default function Dashboard() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/auth/signin');
-    }
-  }, [status, router]);
-
-  if (status === 'loading') {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
-
+    <SidebarInset>
+      <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
+        <SidebarTrigger className="-ml-1" />
+        <Separator orientation="vertical" className="mr-2 h-4" />
+        <h1 className="text-xl font-semibold">Dashboard</h1>
+      </header>
+      <div className="flex flex-1 flex-col gap-6 p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card>
             <CardHeader>
@@ -72,13 +62,13 @@ export default function Dashboard() {
               <p>Signed in as: {session?.user?.email}</p>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" onClick={() => router.push('/auth/signout')}>
-                Sign Out
+              <Button variant="outline" onClick={() => router.push('/dashboard/profile')}>
+                Manage Account
               </Button>
             </CardFooter>
           </Card>
         </div>
       </div>
-    </div>
+    </SidebarInset>
   );
 }
