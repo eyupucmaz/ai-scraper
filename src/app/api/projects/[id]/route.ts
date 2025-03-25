@@ -5,9 +5,12 @@ import { projects } from '@/lib/db/schema';
 import { eq, and } from 'drizzle-orm';
 
 // GET /api/projects/[id] - Get a single project by ID
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = params.id;
+    const { id } = await params;
 
     if (!id || isNaN(parseInt(id))) {
       return NextResponse.json({ error: 'Invalid project ID' }, { status: 400 });
@@ -63,9 +66,12 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // DELETE /api/projects/[id] - Delete a project
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = params.id;
+    const { id } = await params;
 
     if (!id || isNaN(parseInt(id))) {
       return NextResponse.json({ error: 'Invalid project ID' }, { status: 400 });
